@@ -2,6 +2,9 @@ name: CI
 
 on: [push, pull_request]
 
+# Allows you to run this workflow manually from the Actions tab
+workflow_dispatch: 
+
 jobs:
   cabal:
     name: ${{ matrix.os }} / ghc ${{ matrix.ghc }}
@@ -11,19 +14,17 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
         cabal: ["3.4"]
         ghc:
-          - "8.6.5"
-          - "8.8.4"
-          - "8.10.7"
-        exclude:
-          # Test only with latest GHC on windows and macOS
-          - os: macOS-latest
-            ghc: 8.6.5
-          - os: macOS-latest
-            ghc: 8.8.4
-          - os: windows-latest
-            ghc: 8.6.5
-          - os: windows-latest
-            ghc: 8.8.4
+          # - "8.6.5"
+          - "8.8.3"
+          # - "8.10.7"
+        # exclude:
+        #   # Test only with latest GHC on windows and macOS
+        #   - os: macOS-latest
+        #     ghc: 8.8.3
+        #   - os: windows-latest
+        #     ghc: 8.6.5
+        #   - os: windows-latest
+        #     ghc: 8.8.4
 
     steps:
     - uses: actions/checkout@v2
@@ -64,7 +65,7 @@ jobs:
     strategy:
       matrix:
         stack: ["2.7.3"]
-        resolver: ["lts-16.31", "lts-18.10"]
+        resolver: ["lts-16.2"]
 
     steps:
     - uses: actions/checkout@v2
